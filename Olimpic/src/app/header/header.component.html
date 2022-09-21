@@ -1,0 +1,11 @@
+<div class="container">
+  <header class="d-flex justify-content-center py-3">
+    <ul class="nav nav-pills">
+      <li *ngFor="let link of links">
+        <a [routerLink]="link.rota" class="nav-link">
+          <p>{{link.textContent}}</p>
+        </a>
+      </li>
+    </ul>
+  </header>
+</div>
