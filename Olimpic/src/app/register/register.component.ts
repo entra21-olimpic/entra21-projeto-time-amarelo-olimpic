@@ -1,5 +1,6 @@
 
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { catchError, of } from 'rxjs';
 import { RegisterService } from '../register.service';
@@ -23,10 +24,11 @@ export class RegisterComponent implements OnInit {
   user!: any;
   cadastrando!: boolean;
 
-  constructor(private userService: RegisterService) { }
+  constructor(private userService: RegisterService, private router: Router) { }
 
   ngOnInit(): void {
     this.getAll();
+    this.user = {};
   }
   getAll(): void {
     this.userService
@@ -65,6 +67,15 @@ export class RegisterComponent implements OnInit {
   validForm(): boolean {
     let valid: boolean = true;
     if (!this.user.name || !this.user.last_name || !this.user.age || !this.user.telephone || !this.user.address || !this.user.email || !this.user.password ) {
+      valid = false;
+    }
+
+    return valid;
+  }
+
+  validLogin(): boolean {
+    let valid: boolean = true;
+    if (!this.user.email || !this.user.password ) {
       valid = false;
     }
 
@@ -139,6 +150,16 @@ export class RegisterComponent implements OnInit {
           this.users.splice(this.users.indexOf(this.user), 1);
         }
       });
+  }
+
+  login(){
+    if(!this.validLogin()){
+      alert('Usuário ou senha inválidos');
+      return;
+    }
+
+    this.router.navigateByUrl("profile")
+
   }
 }
 
