@@ -27,6 +27,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAll();
+    this.user = {};
   }
   getAll(): void {
     this.userService

@@ -1,5 +1,4 @@
 import { SettingsComponent } from './settings/settings.component';
-import { LoginComponent } from './login/login.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
@@ -15,7 +14,6 @@ const routes: Routes = [
   { path: "", component: HomeComponent },
   { path: "profile", component: ProfileComponent },
   { path: "register", component: RegisterComponent },
-  { path: "login", component: LoginComponent },
   { path: "settings", component: SettingsComponent},
   { path: "about", component: AboutComponent},
   { path: "faq", component: FaqComponent}
