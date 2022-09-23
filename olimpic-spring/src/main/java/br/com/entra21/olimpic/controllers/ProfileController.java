@@ -92,6 +92,7 @@ public class ProfileController {
 		atualizado.setEmail(profileAtualizado.getEmail());
 		atualizado.setPassword(profileAtualizado.getPassword());
 		atualizado.setAbout(profileAtualizado.getAbout());
+		profileRepository.save(atualizado);
 
 		return profileRepository.findById(param);
 	}

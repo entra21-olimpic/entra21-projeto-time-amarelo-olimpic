@@ -15,30 +15,28 @@ export class RegisterService {
 
 
 
-  profileURL:string="http://localhost:8080/profile"
+  profileUrl:string = "http://localhost:8080/profile";
 
-  constructor(private http: HttpClient) { }
-
-
+  constructor(private http:HttpClient) { }
 
   getAll():Observable<any>{
-    return this.http.get<any>(this.profileURL)
+    return this.http.get<any>(this.profileUrl)
   }
 
-  getById(personagem:any):Observable<any>{
-    return this.http.get<any>(this.profileURL,personagem)
+  getById(profile:any):Observable<any>{
+    return this.http.get<any>(this.profileUrl,profile)
   }
 
-  create(personagem:any):Observable<any>{
-    return this.http.post<any>(this.profileURL, personagem)
+  create(profile:any):Observable<any>{
+    return this.http.post<any>(this.profileUrl, profile)
   }
 
-  update(personagem:any):Observable<any>{
-    return this.http.put<any>(this.profileURL + "/" + personagem.id, personagem)
+  update(profile:any):Observable<any>{
+    return this.http.put<any>(this.profileUrl + "/" + profile.id, profile)
   }
 
-  delete(personagem:any):Observable<any>{
-    return this.http.delete<any>(this.profileURL + "/" +  personagem.id)
+  delete(profile:any):Observable<any>{
+    return this.http.delete<any>(this.profileUrl + "/" +  profile.id)
   }
 
 }
