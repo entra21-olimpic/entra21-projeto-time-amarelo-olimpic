@@ -1,9 +1,9 @@
-import { HttpStatusCode } from '@angular/common/http';
+import { HttpClient, HttpStatusCode } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, isEmpty, of } from 'rxjs';
 import { RegisterService } from '../register.service';
-import { SegurancaService } from '../seguranca.service';
+
 
 @Component({
   selector: 'app-login',
@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   user!: any;
   cadastrando!: boolean;
 
-  constructor(private userService: RegisterService, private router: Router) {}
+  constructor(private userService: RegisterService, private router: Router, private  http:HttpClient) {}
 
   ngOnInit(): void {
     this.user = {};
@@ -35,14 +35,16 @@ export class LoginComponent implements OnInit {
       )
 
       .subscribe((response: any) => {
-        console.log(response);
 
-        if (response()) { // está funcionanod no console mas ainda falta no site
+        if (!response.status) { // Funcionando mas precisa de revisão
+
           this.router.navigateByUrl('profile');
+
+        }else{
+          alert('Usuário ou senha inválidos!')
+
         }
 
-        alert('yeap');
-        //this.router.navigateByUrl("profile")
       });
   }
 
