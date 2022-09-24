@@ -7,12 +7,14 @@ import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
 import { AboutComponent } from './about/about.component';
 import { FaqComponent } from './faq/faq.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   { path: "header", component: HeaderComponent },
   { path: "home", component: HomeComponent },
   { path: "", component: HomeComponent },
   { path: "profile", component: ProfileComponent },
+  { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },
   { path: "settings", component: SettingsComponent},
   { path: "about", component: AboutComponent},

@@ -24,7 +24,7 @@ export class RegisterComponent implements OnInit {
   user!: any;
   cadastrando!: boolean;
 
-  constructor(private userService: RegisterService, private router: Router) { }
+  constructor(private userService: RegisterService) { }
 
   ngOnInit(): void {
     this.getAll();
@@ -73,14 +73,7 @@ export class RegisterComponent implements OnInit {
     return valid;
   }
 
-  validLogin(): boolean {
-    let valid: boolean = true;
-    if (!this.user.email || !this.user.password ) {
-      valid = false;
-    }
 
-    return valid;
-  }
 
   create(): void {
     if(!this.validForm()){
@@ -152,14 +145,6 @@ export class RegisterComponent implements OnInit {
       });
   }
 
-  login(){
-    if(!this.validLogin()){
-      alert('Usuário ou senha inválidos');
-      return;
-    }
 
-    this.router.navigateByUrl("profile")
-
-  }
 }
 
