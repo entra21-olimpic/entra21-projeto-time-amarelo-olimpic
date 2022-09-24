@@ -75,6 +75,22 @@ public class ProfileController {
 	public @ResponseBody Profile adicionar(@RequestBody Profile novoProfile) {
 		return profileRepository.save(novoProfile);
 	}
+	
+	@PostMapping("/login")
+	@ResponseStatus(HttpStatus.ACCEPTED)
+	
+	public @ResponseBody Profile login(@RequestBody Profile credentials) {
+		
+		List<Profile> response = profileRepository.findAll().stream().toList();
+		
+		for(Profile profile : response) {
+			if(credentials.getEmail().equals(profile.getEmail()) && credentials.getPassword().equals(profile.getPassword())) {
+				return profile;
+			}
+		}
+		
+		return null;
+	}
 
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)

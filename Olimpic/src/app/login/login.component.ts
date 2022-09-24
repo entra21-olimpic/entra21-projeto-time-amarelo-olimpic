@@ -1,62 +1,55 @@
+import { HttpStatusCode } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError, of } from 'rxjs';
+import { catchError, isEmpty, of } from 'rxjs';
 import { RegisterService } from '../register.service';
+import { SegurancaService } from '../seguranca.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-
+  email!: string;
+  password!: string;
   users!: Array<any>;
   user!: any;
   cadastrando!: boolean;
 
-  constructor(private userService: RegisterService, private router: Router) { }
+  constructor(private userService: RegisterService, private router: Router) {}
 
   ngOnInit(): void {
-    this.getAll();
     this.user = {};
   }
 
-  getAll(): void {
+  login(): void {
     this.userService
-      .getAll()
+
+      .login(this.getDados())
+
       .pipe(
         catchError((error) => {
-          let personagens: Array<any> = new Array();
-          personagens.push({ id: 1 });
-          personagens.push({ id: 2 });
-          personagens.push({ id: 3 });
-          return of(personagens);
+          return of(error);
         })
       )
-      .subscribe((response) => {
+
+      .subscribe((response: any) => {
         console.log(response);
 
-        this.users = response;
+        if (response()) { // está funcionanod no console mas ainda falta no site
+          this.router.navigateByUrl('profile');
+        }
+
+        alert('yeap');
+        //this.router.navigateByUrl("profile")
       });
   }
 
-  validLogin(): boolean {
-    let valid: boolean = true;
-    if (!this.user.email || !this.user.password ) {
-      valid = false;
-    }
-
-    return valid;
+  getDados(): any {
+    return {
+      email: this.email,
+      password: this.password,
+    };
   }
-
-  login(){
-    if(!this.validLogin()){
-      alert('Usuário ou senha inválidos');
-      return;
-    }
-
-    this.router.navigateByUrl("profile")
-
-  }
-
 }
