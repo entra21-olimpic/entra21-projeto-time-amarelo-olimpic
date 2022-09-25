@@ -1,30 +1,20 @@
-
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { catchError, of } from 'rxjs';
 import { RegisterService } from '../register.service';
 
-
-
-
 @Component({
-
   selector: 'app-register',
 
   templateUrl: './register.component.html',
 
   styleUrls: ['./register.component.css'],
-
 })
-
 export class RegisterComponent implements OnInit {
-
   users!: Array<any>;
   user!: any;
-  cadastrando!: boolean;
 
-  constructor(private userService: RegisterService) { }
+  constructor(private userService: RegisterService, private router:Router) {}
 
   ngOnInit(): void {
     this.getAll();
@@ -35,11 +25,11 @@ export class RegisterComponent implements OnInit {
       .getAll()
       .pipe(
         catchError((error) => {
-          let personagens: Array<any> = new Array();
-          personagens.push({ id: 1 });
-          personagens.push({ id: 2 });
-          personagens.push({ id: 3 });
-          return of(personagens);
+          let users: Array<any> = new Array();
+          users.push({ id: 1 });
+          users.push({ id: 2 });
+          users.push({ id: 3 });
+          return of(users);
         })
       )
       .subscribe((response) => {
@@ -49,52 +39,44 @@ export class RegisterComponent implements OnInit {
       });
   }
 
-  openForm(): void {
-    this.user = {};
-    this.cadastrando = true;
-  }
-
-  closeForm(): void {
-    this.user = {};
-    this.cadastrando = false;
-  }
-
-  updateForm(user: any): void {
-    this.user = user;
-    this.cadastrando = true;
-  }
-
   validForm(): boolean {
     let valid: boolean = true;
-    if (!this.user.name || !this.user.last_name || !this.user.age || !this.user.telephone || !this.user.address || !this.user.email || !this.user.password ) {
+    if (
+      !this.user.name ||
+      !this.user.last_name ||
+      !this.user.age ||
+      !this.user.telephone ||
+      !this.user.address ||
+      !this.user.email ||
+      !this.user.password
+    ) {
       valid = false;
     }
 
     return valid;
   }
 
-
-
   create(): void {
-    if(!this.validForm()){
+    if (!this.validForm()) {
       alert('Preencha os campos obrigatórios');
       return;
     }
 
-    this.userService.create(this.user).pipe(catchError((error) =>{
-      return of(error);
-    })
-    ).subscribe((response:any) =>{
-      console.log(response);
+    this.userService
+      .create(this.user)
+      .pipe(
+        catchError((error) => {
+          return of(error);
+        })
+      )
+      .subscribe((response: any) => {
+        console.log(response);
 
-      if(response){
-        this.users.push(response);
-
-        this.closeForm();
-      }
-
-    });
-
+        if (response) {
+          this.users.push(response);
+          this.router.navigateByUrl('profile');
+        }
+      });
   }
 
   update(): void {
@@ -119,8 +101,6 @@ export class RegisterComponent implements OnInit {
 
         if (response) {
           this.users[this.users.indexOf(this.user)] = response;
-
-          this.closeForm();
         }
       });
   }
@@ -144,7 +124,4 @@ export class RegisterComponent implements OnInit {
         }
       });
   }
-
-
 }
-

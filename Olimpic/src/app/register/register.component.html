@@ -1,32 +1,96 @@
-    <div class="justify-center items-center bg-gray-100 p-8 flex flex-col lg:px-8">
-      <h2 class="text-gray-900 text-lg font-medium title-font mb-5">Cadastrar</h2>
-      <div class="relative mb-4">
-        <label for="full-name" class="leading-7 text-sm text-gray-600">Name</label>
-        <input type="text" [(ngModel)]="user.name" id="full-name" name="full-name" class="w-full bg-white rounded border border-gray-300 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" >
+<div class="mt-10 sm:mt-0 bg-gray-100">
+  <div class="md:grid md:grid-cols-6 md:gap-6">
+    <div class="md:col-span-2"></div>
+    <div class="mt-5 md:col-span-2 md:mt-0">
+      <div class="overflow-hidden shadow sm:rounded-md">
+        <div class="bg-gray-100 px-4 py-5 sm:p-6">
+          <h2 class="text-gray-900 text-lg font-medium title-font mb-5">
+            Cadastrar
+          </h2>
+          <div class="grid grid-cols-7 gap-6">
+            <div class="mb-4 col-span-6 sm:col-span-3">
+              <label for="full-name">Name</label>
+              <input
+                type="text"
+                [(ngModel)]="user.name"
+                id="full-name"
+                name="full-name"
+                class="w-full bg-white rounded border border-gray-300 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 text-base outline-none text-gray-700 h-8 transition-colors duration-200 ease-in-out"
+              />
+            </div>
+            <div class="mb-4 col-span-6 sm:col-span-3">
+              <label for="last-name">Last Name</label>
+              <input
+                type="text"
+                [(ngModel)]="user.last_name"
+                id="last-name"
+                name="last-name"
+                class="w-full bg-white rounded border border-gray-300 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 text-base outline-none text-gray-700 h-8 transition-colors duration-200 ease-in-out"
+              />
+            </div>
+            <div class="relative mb-4 col-span-6 sm:col-span-1">
+              <label for="age">Age</label>
+              <input
+                type="number"
+                [(ngModel)]="user.age"
+                id="age"
+                name="age"
+                class="w-full bg-white rounded border border-gray-300 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 text-base outline-none text-gray-700 h-8 transition-colors duration-200 ease-in-out"
+              />
+            </div>
+            <div class="relative mb-4 col-span-6 sm:col-span-3">
+              <label for="telephone">Telephone</label>
+              <input
+                type="number"
+                [(ngModel)]="user.telephone"
+                id="telephone"
+                name="telephone"
+                class="w-full bg-white rounded border border-gray-300 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 text-base outline-none text-gray-700 h-8 transition-colors duration-200 ease-in-out"
+              />
+            </div>
+            <div class="relative mb-4 col-span-6 sm:col-span-4">
+              <label for="address">Address</label>
+              <input
+                type="text"
+                [(ngModel)]="user.address"
+                id="text"
+                name="address"
+                class="w-full bg-white rounded border border-gray-300 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 text-base outline-none text-gray-700 h-8 transition-colors duration-200 ease-in-out"
+              />
+            </div>
+            <div class="relative mb-4 col-span-6 sm:col-span-7">
+              <label for="email">E-mail</label>
+              <input
+                type="email"
+                [(ngModel)]="user.email"
+                id="email"
+                name="email"
+                class="w-full bg-white rounded border border-gray-300 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 text-base outline-none text-gray-700 h-8 transition-colors duration-200 ease-in-out"
+              />
+            </div>
+            <div class="relative mb-4 col-span-6 sm:col-span-7">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                [(ngModel)]="user.password"
+                id="password"
+                name="password"
+                class="w-full bg-white rounded border border-gray-300 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 text-base outline-none text-gray-700 h-8 transition-colors duration-200 ease-in-out"
+              />
+            </div>
+
+
+              <button
+                (click)="create()"
+                class="relative col-span-6 sm:col-span-7 text-white bg-yellow-500 border-0 py-2 px-8 focus:outline-none hover:bg-yellow-600 rounded text-lg"
+              >
+                Cadastrar
+              </button>
+
+          </div>
+        </div>
       </div>
-      <div class="relative mb-4">
-        <label for="last-name" class="leading-7 text-sm text-gray-600">Last Name</label>
-        <input type="text" [(ngModel)]="user.last_name" id="last-name" name="last-name" class="w-full bg-white rounded border border-gray-300 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-      </div>
-      <div class="relative mb-4">
-        <label for="age" class="leading-7 text-sm text-gray-600">Age</label>
-        <input type="number" [(ngModel)]="user.age" id="age" name="age" class="w-full bg-white rounded border border-gray-300 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-      </div>
-      <div class="relative mb-4">
-        <label for="telephone" class="leading-7 text-sm text-gray-600">Telephone</label>
-        <input type="number" [(ngModel)]="user.telephone" id="telephone" name="telephone" class="w-full bg-white rounded border border-gray-300 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-      </div>
-      <div class="relative mb-4">
-        <label for="address" class="leading-7 text-sm text-gray-600">Address</label>
-        <input type="text" [(ngModel)]="user.address" id="text" name="address" class="w-full bg-white rounded border border-gray-300 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-      </div>
-      <div class="relative mb-4">
-        <label for="email" class="leading-7 text-sm text-gray-600">E-mail</label>
-        <input type="email" [(ngModel)]="user.email" id="email" name="email" class="w-full bg-white rounded border border-gray-300 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-      </div>
-      <div class="relative mb-4">
-        <label for="password" class="leading-7 text-sm text-gray-600">Password</label>
-        <input type="password" [(ngModel)]="user.password" id="password" name="password" class="w-full bg-white rounded border border-gray-300 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-      </div>
-      <button (click)="create()" class="text-white bg-yellow-500 border-0 py-2 px-8 focus:outline-none hover:bg-yellow-600 rounded text-lg">Cadastrar</button>
     </div>
+    <div class="md:col-span-2"></div>
+  </div>
+</div>

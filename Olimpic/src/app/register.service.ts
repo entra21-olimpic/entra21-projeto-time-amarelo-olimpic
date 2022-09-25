@@ -13,17 +13,9 @@ import { Observable } from 'rxjs';
 
 export class RegisterService {
 
-
-
   profileUrl:string = "http://localhost:8080/profile";
 
   constructor(private http:HttpClient) { }
-
-  login(credentials:any): Observable<any>{
-
-    return this.http.post<any>(this.profileUrl+"/login",credentials)
-
-  }
 
   getAll():Observable<any>{
     return this.http.get<any>(this.profileUrl)

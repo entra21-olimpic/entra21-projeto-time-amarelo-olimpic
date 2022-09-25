@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, isEmpty, of } from 'rxjs';
-import { RegisterService } from '../register.service';
-
+import { LoginService } from '../login.service';
 
 @Component({
   selector: 'app-login',
@@ -12,18 +11,13 @@ import { RegisterService } from '../register.service';
 export class LoginComponent implements OnInit {
   email!: string;
   password!: string;
-  users!: Array<any>;
-  user!: any;
-  cadastrando!: boolean;
 
-  constructor(private userService: RegisterService, private router: Router) {}
+  constructor(private loginService: LoginService, private router: Router) {}
 
-  ngOnInit(): void {
-    this.user = {};
-  }
+  ngOnInit(): void {}
 
   login(): void {
-    this.userService
+    this.loginService
 
       .login(this.getDados())
 
@@ -34,16 +28,13 @@ export class LoginComponent implements OnInit {
       )
 
       .subscribe((response: any) => {
-
         console.log(response);
 
-
-        if(response != null){
+        if (response != null) {
           this.router.navigateByUrl('profile');
-        }else{
-          alert('Usuário ou senha inválidos!')
+        } else {
+          alert('Usuário ou senha inválidos!');
         }
-
       });
   }
 
