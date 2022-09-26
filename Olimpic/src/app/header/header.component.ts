@@ -30,15 +30,6 @@ export class HeaderComponent implements OnInit {
       rota: "about",
       textContent: "About",
     });
-    this.links.push({
-      rota: "login",
-      textContent: "Login",
-    });
-    this.links.push({
-      rota: "register",
-      textContent: "Register",
-    });
-
   }
 
 }
