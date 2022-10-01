@@ -67,6 +67,33 @@ public class ProfileController {
 		return response;
 
 	}
+	
+	@GetMapping("/name/{name}")
+	public List<Profile> listName(@PathVariable("name") String name){
+		return profileRepository.findByNameStartingWith(name);
+	}
+	
+	
+	@GetMapping("/maiorigual/{age}")
+		public List<Profile> maiorIgual(@PathVariable("age")Integer age){
+			return profileRepository.findByAgeGreaterThanEqual(age);
+		}
+	
+	@GetMapping("/igual/{age}")
+	public List<Profile> igual(@PathVariable("age")Integer age){
+		return profileRepository.findByAgeEquals(age);
+	}
+	
+	@GetMapping("/email/{email}")
+	public List<Profile> contemEmail(@PathVariable("email")String email){
+		return profileRepository.findByEmailContaining(email); 
+	}
+	
+	@GetMapping("/password")
+		public String senhasComuns(){
+		return profileRepository.commonsPasswords(); 
+	}
+	
 
 	@PostMapping()
 
