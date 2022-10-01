@@ -18,6 +18,7 @@ export class HeaderComponent implements OnInit {
     this.seguranca.entrou = false;
 
     this.links = new Array();
+
     this.links.push({
       rota: "home",
       textContent: "Home",

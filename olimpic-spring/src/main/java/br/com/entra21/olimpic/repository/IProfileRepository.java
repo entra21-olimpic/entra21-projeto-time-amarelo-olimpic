@@ -17,8 +17,6 @@ public interface IProfileRepository extends JpaRepository<Profile, Integer> {
 	
 	public List<Profile> findByEmailContaining(String email);
 	
-	public List<Profile> countByPassword(String password);
-	
 	public List<Profile> findByPasswordOrderById(String password);
 	
 	@Query(nativeQuery = true,
