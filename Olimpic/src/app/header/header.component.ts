@@ -5,14 +5,12 @@ import { SegurancaService } from '../seguranca.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
+  links!: Array<any>;
 
-  links!: Array<any>
-
-  constructor(private router: Router,
-    private seguranca: SegurancaService) { }
+  constructor(public router: Router, private seguranca: SegurancaService) {}
 
   ngOnInit(): void {
     this.seguranca.entrou = false;
@@ -20,17 +18,21 @@ export class HeaderComponent implements OnInit {
     this.links = new Array();
 
     this.links.push({
-      rota: "home",
-      textContent: "Home",
+      rota: 'home',
+      textContent: 'Home',
     });
     this.links.push({
-      rota: "faq",
-      textContent: "FAQs",
+      rota: 'faq',
+      textContent: 'FAQs',
     });
     this.links.push({
-      rota: "about",
-      textContent: "About",
+      rota: 'about',
+      textContent: 'About',
     });
   }
 
+  logout() {
+    localStorage.removeItem('dados');
+    this.router.navigateByUrl('home');
+  }
 }

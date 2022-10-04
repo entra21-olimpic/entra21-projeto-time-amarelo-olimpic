@@ -13,6 +13,7 @@ import { RegisterService } from '../register.service';
 export class RegisterComponent implements OnInit {
   users!: Array<any>;
   user!: any;
+  signingup:boolean = false
 
   constructor(private userService: RegisterService, private router:Router) {}
 
@@ -71,10 +72,11 @@ export class RegisterComponent implements OnInit {
       )
       .subscribe((response: any) => {
         console.log(response);
+        this.signingup = true;
 
         if (response) {
           this.users.push(response);
-          this.router.navigateByUrl('profile');
+
         }
       });
   }

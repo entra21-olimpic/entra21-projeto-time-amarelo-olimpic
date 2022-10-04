@@ -15,7 +15,7 @@
         </a>
       </li>
     </nav>
-  <div [hidden]="false">  <!--Fazer lógica esconder Login e Logout-->
+  <div *ngIf="router.url !== '/profile'">
       <button routerLink="login"
         class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">Login
         <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -24,8 +24,8 @@
         </svg>
       </button>
   </div>
-    <div [hidden]="true">
-      <button routerLink="login"
+    <div *ngIf="router.url === '/profile'">
+      <button (click)="logout()"
         class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">Logout
         <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
           class="w-4 h-4 ml-1" viewBox="0 0 24 24">

@@ -3,7 +3,7 @@
     <div class="md:col-span-2"></div>
     <div class="mt-5 md:col-span-2 md:mt-0">
       <div class="overflow-hidden shadow sm:rounded-md">
-        <div class="bg-gray-100 px-4 py-5 sm:p-6">
+        <div [hidden]="signingup" class="bg-gray-100 px-4 py-5 sm:p-6">
           <h2 class="text-gray-900 text-lg font-medium title-font mb-5">
             Cadastrar
           </h2>
@@ -21,7 +21,7 @@
             <div class="mb-4 col-span-6 sm:col-span-3">
               <label for="last-name">Last Name</label>
               <input
-                type="text"
+                type="text-area"
                 [(ngModel)]="user.last_name"
                 id="last-name"
                 name="last-name"
@@ -79,14 +79,60 @@
               />
             </div>
 
+            <button
+              (click)="create()"
+              class="relative col-span-6 sm:col-span-7 text-white bg-yellow-500 border-0 py-2 px-8 focus:outline-none hover:bg-yellow-600 rounded text-lg"
+            >
+              Cadastrar
+            </button>
+          </div>
+        </div>
 
-              <button
-                (click)="create()"
-                class="relative col-span-6 sm:col-span-7 text-white bg-yellow-500 border-0 py-2 px-8 focus:outline-none hover:bg-yellow-600 rounded text-lg"
-              >
-                Cadastrar
-              </button>
+        <div [hidden]="!signingup" class="bg-gray-100 px-4 py-5 sm:p-6">
+          <h2 class="text-gray-900 text-lg font-medium title-font mb-5">
+            Completar Cadastro
+          </h2>
+          <div class="grid grid-cols-7 gap-6">
 
+            <div class="mb-2 col-span-6 sm:col-span-7">
+              <label for="graduation">Graduation</label>
+              <input
+                type="text"
+                [(ngModel)]="user.graduation"
+                id="graduation"
+                name="graduation"
+                class="w-full bg-white rounded border border-gray-300 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 text-base outline-none text-gray-700 h-8 transition-colors duration-200 ease-in-out"
+              />
+            </div>
+
+            <div class="mb-4 col-span-6 sm:col-span-7">
+              <label for="about">About</label>
+              <input
+                type="text"
+                [(ngModel)]="user.about"
+                id="about"
+                name="about"
+                class="w-full bg-white rounded border border-gray-300 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 text-base outline-none text-gray-700 h-20 transition-colors duration-200 ease-in-out"
+              />
+            </div>
+            <div class="relative mb-4 col-span-6 sm:col-span-7">
+              <label for="file">Image</label>
+
+              <input
+                type="file"
+                [(ngModel)]="user.image"
+                id="file"
+                name="file"
+                class="w-full bg-white rounded border border-gray-300 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 text-base outline-none text-gray-700 h-8 transition-colors duration-200 ease-in-out"
+              />
+            </div>
+
+            <button
+              (click)="update()"
+              class="relative col-span-6 sm:col-span-7 text-white bg-yellow-500 border-0 py-2 px-8 focus:outline-none hover:bg-yellow-600 rounded text-lg"
+            >
+              Cadastrar
+            </button>
           </div>
         </div>
       </div>
