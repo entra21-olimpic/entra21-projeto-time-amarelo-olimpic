@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-profile',
@@ -12,17 +11,14 @@ export class ProfileComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.links = JSON.parse(localStorage.getItem('dados') || '');
-
-    console.log(typeof this.links);
-
-    console.log(this.links);
-
     this.links = new Array();
 
-    this.links.push({
-      // Usuario do Banco
-      // About vindo do Banco
-    });
+    this.links.push(
+
+      JSON.parse(localStorage.getItem('dados') || '')
+
+      );
+
+    console.log(this.links);
   }
 }

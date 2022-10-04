@@ -1,5 +1,5 @@
 
-<div>{{links}}</div> <!--Consegui fazer quem logou aparecer no console, mas não consegui pegar esses dados do console para mandar para o site.-->
+<!-- <div>{{links[0].name + " " + links[0].last_name}}</div>  Exemplo de uso -->
 
 <div class="h-screen w-screen bg-yellow-400 overflow-hidden absolute flex items-center">
   <div class="w-screen h-64 absolute top-0 opacity-50 left-0 -my-40 -mx-64 bg-yellow-300 rounded-full"></div>
@@ -14,7 +14,7 @@
       <div class="p-8 shadow-md relative bg-white">
         <div class="flex items-center">
           <img src="https://randomuser.me/api/portraits/men/1.jpg" class="w-10 h-10 block rounded object-cover object-top" />
-          <div class="text-yellow-600 font-medium ml-3">Lucas Corrêa Agostinho</div>
+          <div class="text-yellow-600 font-medium ml-3">{{links[0].name + " " + links[0].last_name}}</div>
           <button class="bg-indigo-100 text-indigo-400 ml-auto w-8 h-8 flex items-center justify-center rounded">
             <svg stroke="currentColor" class="w-4 h-4" viewBox="0 0 24 24" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
           </button>
