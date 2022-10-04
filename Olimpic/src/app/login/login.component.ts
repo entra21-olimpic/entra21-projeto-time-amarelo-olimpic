@@ -11,6 +11,8 @@ import { LoginService } from '../login.service';
 export class LoginComponent implements OnInit {
   email!: string;
   password!: string;
+  teste!: Array<JSON>;
+
 
   constructor(private loginService: LoginService, private router: Router) {}
 
@@ -31,6 +33,9 @@ export class LoginComponent implements OnInit {
         console.log(response);
 
         if (response != null) {
+          let dados =  localStorage.setItem('dados', JSON.stringify (response));
+          console.log(dados);
+
           this.router.navigateByUrl('profile');
         } else {
           alert('Usuário ou senha inválidos!');
@@ -44,4 +49,5 @@ export class LoginComponent implements OnInit {
       password: this.password,
     };
   }
+
 }
