@@ -14,7 +14,7 @@
     <div class="w-full lg:w-1/2 px-4 py-2">
       <details class="mb-4">
         <summary class="font-semibold bg-gray-200 rounded-md py-2 px-4">
-          Why use this site?
+          {{ faqs[2].message }}
         </summary>
 
         <span>
@@ -25,7 +25,7 @@
       </details>
       <details class="mb-4">
         <summary class="font-semibold bg-gray-200 rounded-md py-2 px-4">
-          What are the advantages that the site can give me?
+          {{ faqs[3].message }}
         </summary>
 
         <span>
@@ -35,7 +35,7 @@
       </details>
       <details class="mb-4">
         <summary class="font-semibold bg-gray-200 rounded-md py-2 px-4">
-          Why can't I login?
+         {{ faqs[4].message }}
         </summary>
 
         <span>
@@ -47,21 +47,21 @@
     <div class="w-full lg:w-1/2 px-4 py-2">
       <details class="mb-4">
         <summary class="font-semibold bg-gray-200 rounded-md py-2 px-4">
-          Fazer Pergunta?
+          {{ faqs[5].message }}
         </summary>
 
         <span class="px-4 py-2"> Resposta... </span>
       </details>
       <details class="mb-4">
         <summary class="font-semibold bg-gray-200 rounded-md py-2 px-4">
-          Fazer Pergunta?
+          <!-- {{ faqs[6].message }} -->
         </summary>
 
         <span class="px-4 py-2"> Resposta... </span>
       </details>
       <details class="mb-4">
         <summary class="font-semibold bg-gray-200 rounded-md py-2 px-4">
-          Fazer Pergunta?
+          <!-- {{ faqs[7].message }} -->
         </summary>
 
         <span class="px-4 py-2"> Resposta... </span>
@@ -70,11 +70,38 @@
   </div>
 </div>
 
-<h6 class="text-center pb-7">Did you have any doubts? Fill in the field below and we will respond as soon as possible!</h6>
+<h6 class="text-center pb-7">
+  Did you have any doubts? Fill in the field below and we will respond as soon
+  as possible!
+</h6>
 
 <div class="md:grid md:grid-cols-6 md:gap-6">
   <div class="md:col-span-2"></div>
   <div class="md:col-span-2">
+
+    <div class="items-center rounded-lg shadow-lg bg-gray-100">
+      <div class="form-group mb-6">
+        <label for="name"></label>
+        <input
+          [(ngModel)]="faq.name"
+          type="text"
+          class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+          id="name"
+          placeholder="Name"
+        />
+      </div>
+      <div class="form-group mb-6">
+        <label for="email"></label>
+        <input
+          [(ngModel)]="faq.email"
+          type="email"
+          class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+          id="email"
+          placeholder="Email address"
+        />
+      </div>
+      <div class="form-group mb-6">
+
     <div class="items-center rounded-lg">
       <form
         action="mailto:alexsandro19031@hotmail.com?subject=contato-via-site-pessoal"
@@ -99,15 +126,16 @@
             placeholder="Email address"
           />
         </div>
+
         <div class="form-group mb-6">
           <textarea
+          [(ngModel)]="faq.message"
             class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             id="exampleFormControlTextarea13"
             rows="3"
             placeholder="Message"
           ></textarea>
         </div>
-
 
         <div class="grid grid-cols-6 gap-6">
           <div class="mb-4 col-span-6 sm:col-span-3">
@@ -120,17 +148,24 @@
           </div>
           <div class="mb-4 col-span-6 sm:col-span-3">
             <button
+              (click)="create()"
               type="submit"
+
+              class="w-full px-6 py-2.5 bg-yellow-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-yellow-400 hover:shadow-lg focus:bg-yellow-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-yellow-500 active:shadow-lg transition duration-150 ease-in-out clear"
+
               class="w-full px-6 py-2.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-yellow-400 hover:shadow-lg focus:bg-yellow-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-yellow-500 active:shadow-lg transition duration-150 ease-in-out"
+
             >
               Send
             </button>
+
+            <div class="alert alert-danger" role="alert">
+              Pergunta enviada com sucesso!
+            </div>
           </div>
         </div>
-
-      </form>
+      </div>
     </div>
   </div>
   <div class="md:col-span-2"></div>
-
-
+</div>
