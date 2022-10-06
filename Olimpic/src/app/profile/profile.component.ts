@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
   links!: Array<any>;
+  timeLeft: number = 0;
+  interval: any;
 
   constructor() {}
 
@@ -21,4 +23,21 @@ export class ProfileComponent implements OnInit {
 
     console.log(this.links);
   }
+
+  startTimer() {
+      this.interval = setInterval(() => {
+        if(this.timeLeft > 0) {
+          this.timeLeft++;
+          console.log(this.timeLeft)
+        } else {
+          this.timeLeft = 60;
+          console.log(this.timeLeft)
+        }
+      },1000)
+    }
+
+    pauseTimer() {
+      clearInterval(this.interval);
+    }
+
 }

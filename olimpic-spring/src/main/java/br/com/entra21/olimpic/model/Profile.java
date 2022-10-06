@@ -16,7 +16,6 @@ public class Profile extends MaturidadeNivel3Richardson {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-
 	private Integer id;
 	private String name;
 	private String last_name;
