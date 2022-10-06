@@ -12,6 +12,7 @@ export class FaqComponent implements OnInit {
   faqs!:Array<any>;
   faq!:any;
   sendQuestion: boolean = false;
+  index: number = 6;
 
   constructor(private faqService: FaqService) { }
 

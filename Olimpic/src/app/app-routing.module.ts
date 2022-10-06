@@ -8,6 +8,7 @@ import { RegisterComponent } from './register/register.component';
 import { AboutComponent } from './about/about.component';
 import { FaqComponent } from './faq/faq.component';
 import { LoginComponent } from './login/login.component';
+import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes = [
   { path: "header", component: HeaderComponent },
@@ -18,7 +19,8 @@ const routes: Routes = [
   { path: "register", component: RegisterComponent },
   { path: "settings", component: SettingsComponent},
   { path: "about", component: AboutComponent},
-  { path: "faq", component: FaqComponent}
+  { path: "faq", component: FaqComponent},
+  { path: "admin", component: AdminComponent}
 ];
 
 @NgModule({

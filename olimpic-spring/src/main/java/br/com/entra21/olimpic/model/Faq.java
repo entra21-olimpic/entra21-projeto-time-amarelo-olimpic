@@ -20,18 +20,22 @@ public class Faq extends MaturidadeNivel3Richardson {
 	private String message;
 	private String name;
 	private String email;
+	private String answer;
 	
 	public Faq() {
 		super();
 	}
 
-	public Faq(Integer id, String message, String name, String email) {
+	public Faq(Integer id, String message, String name, String email, String answer) {
 		super();
 		this.id = id;
 		this.message = message;
 		this.name = name;
 		this.email = email;
+		this.answer = answer;
 	}
+
+
 
 	public Integer getId() {
 		return id;
@@ -65,6 +69,13 @@ public class Faq extends MaturidadeNivel3Richardson {
 		this.email = email;
 	}
 	
-	
+	public String getAnswer() {
+		return answer;
+	}
+
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
+
 	
 }

@@ -16,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { AdminComponent } from './admin/admin.component';
 
 
 
@@ -31,6 +32,7 @@ import { BrowserModule } from '@angular/platform-browser';
     FaqComponent,
     FooterComponent,
     LoginComponent,
+    AdminComponent,
 
 
   ],
