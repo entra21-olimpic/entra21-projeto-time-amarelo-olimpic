@@ -15,6 +15,7 @@ export class RegisterComponent implements OnInit {
   users!: Array<any>;
   user!: any;
   signingup:boolean = false
+  status2 : boolean = true
 
   constructor(private userService: RegisterService, private router:Router) {}
 
@@ -52,6 +53,7 @@ export class RegisterComponent implements OnInit {
       !this.user.email ||
       !this.user.password
     ) {
+      this.status2 = false
       valid = false;
     }
 
@@ -60,7 +62,6 @@ export class RegisterComponent implements OnInit {
 
   create(): void {
     if (!this.validForm()) {
-      alert('Preencha os campos obrigatórios');
       return;
     }
 

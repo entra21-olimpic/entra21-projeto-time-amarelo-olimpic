@@ -1,7 +1,12 @@
 <div class="md:grid md:grid-cols-6 md:gap-6">
+  
   <div class="md:col-span-2"></div>
   <div class="md:col-span-2">
     <div class="bg-gray-100 p-8 flex flex-col lg:px-8">
+      <div [hidden]="status" class="button bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+        <strong class="font-bold">Usuário ou senhas incorretos! </strong>
+        <span class="block sm:inline"> Verifique seus dados.</span>
+      </div>
       <h2 class="text-center text-gray-900 text-lg font-medium title-font mb-2">Login</h2>
       <div class="mb-4">
         <label for="email" class="leading-7 text-sm text-gray-600"

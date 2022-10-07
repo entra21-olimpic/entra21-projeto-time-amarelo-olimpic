@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
   email!: string;
   password!: string;
   teste!: Array<JSON>;
+  status: Boolean=true;
 
 
   constructor(private loginService: LoginService, private router: Router) {}
@@ -19,6 +20,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   login(): void {
+
 
     if(this.email === "admin@email.com" && this.password === "admin"){
       this.router.navigateByUrl('admin');
@@ -29,6 +31,7 @@ export class LoginComponent implements OnInit {
 
       .pipe(
         catchError((error) => {
+          this.status=false
           return of(null);
         })
       )
@@ -42,7 +45,6 @@ export class LoginComponent implements OnInit {
 
           this.router.navigateByUrl('profile');
         } else {
-          alert('Usuário ou senha inválidos!');
         }
       });
     }
