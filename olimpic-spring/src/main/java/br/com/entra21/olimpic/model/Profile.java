@@ -1,11 +1,14 @@
 package br.com.entra21.olimpic.model;
 
+import java.io.File;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 @Entity
@@ -26,13 +29,13 @@ public class Profile extends MaturidadeNivel3Richardson {
 	private String email;
 	private String password;
 	private String about;
-
+	private String image;
 	public Profile() {
 		super();
 	}
 
 	public Profile(Integer id, String name, String last_name, Integer age, String telephone, String address,
-			String graduation, String email, String password, String about) {
+			String graduation, String email, String password, String about, String image) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -44,7 +47,9 @@ public class Profile extends MaturidadeNivel3Richardson {
 		this.email = email;
 		this.password = password;
 		this.about = about;
+		this.image = image;
 	}
+
 
 	public Integer getId() {
 		return id;
@@ -126,4 +131,13 @@ public class Profile extends MaturidadeNivel3Richardson {
 		this.about = about;
 	}
 
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	
 }

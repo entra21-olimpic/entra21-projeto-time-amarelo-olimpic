@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, of } from 'rxjs';
@@ -76,17 +77,17 @@ export class RegisterComponent implements OnInit {
 
         if (response) {
           this.users.push(response);
+          this.updateForm(response);
 
         }
       });
   }
 
   update(): void {
-    if (!this.validForm()) {
-      alert('Preencha os campos obrigatorios');
 
-      return;
-    }
+    this.updateForm(this.user);
+    console.log(this.user);
+
 
     this.userService
 
@@ -102,9 +103,15 @@ export class RegisterComponent implements OnInit {
         console.log(response);
 
         if (response) {
-          this.users[this.users.indexOf(this.user)] = response;
+          //this.users[this.users.indexOf(this.user)] = response;
+          this.users.push(response);
+          this.router.navigateByUrl('login');
         }
       });
+  }
+
+  updateForm(response: any): void {
+    this.user = response;
   }
 
   delete(user: any): void {
@@ -126,4 +133,6 @@ export class RegisterComponent implements OnInit {
         }
       });
   }
+
+
 }

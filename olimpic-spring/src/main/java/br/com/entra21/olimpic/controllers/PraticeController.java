@@ -1,7 +1,5 @@
 package br.com.entra21.olimpic.controllers;
 
-import java.time.Duration;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,24 +47,12 @@ public class PraticeController {
 
 	}
 	
-	@GetMapping()
-	@ResponseStatus(HttpStatus.OK)
-	public @ResponseBody Pratice startPratice(@RequestBody Pratice pratice) {
-		boolean running = true;
-		Instant end = null;
-		Instant start = Instant.now();
-		
-		if (running == false) {
-			 end = Instant.now();
-		}
-		
-		Duration time = Duration.between(start, end);
-		
-		pratice.setDuration(time.toString());
-		
-		return praticeRepository.save(pratice);
+	@PostMapping("/data")
+	@ResponseStatus(HttpStatus.CREATED)
+	public @ResponseBody Pratice resultPratice(@RequestBody Pratice data) {
+		return praticeRepository.save(data);
 	}
-	
+		
 	private void setMaturidadeNivel3(Pratice pratice) {
 
 		final String PATH = "localhost:8080/pratice";

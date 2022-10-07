@@ -1,8 +1,12 @@
 package br.com.entra21.olimpic.controllers;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import javax.servlet.http.Part;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,9 +18,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -27,21 +33,16 @@ import br.com.entra21.olimpic.model.Profile;
 import br.com.entra21.olimpic.repository.IProfileRepository;
 
 @RestController
-
 @CrossOrigin(origins = "*")
-
 @RequestMapping("/profile")
 
 public class ProfileController {
 
 	@Autowired
-
 	private IProfileRepository profileRepository;
 
 	@GetMapping()
-
 	@ResponseStatus(HttpStatus.OK)
-
 	public List<Profile> listar() {
 
 		List<Profile> response = profileRepository.findAll();
@@ -57,9 +58,7 @@ public class ProfileController {
 	}
 
 	@GetMapping("/{id}")
-
 	@ResponseStatus(HttpStatus.OK)
-
 	public List<Profile> buscar(@PathVariable("id") int param) {
 
 		List<Profile> response = profileRepository.findById(param).stream().toList();
@@ -105,7 +104,6 @@ public class ProfileController {
 	
 	@PostMapping("/login")
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	
 	public @ResponseBody Profile login(@RequestBody Profile credentials) {
 		
 		List<Profile> response = profileRepository.findAll().stream().toList();
@@ -121,7 +119,6 @@ public class ProfileController {
 
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
-
 	public @ResponseBody Optional<Profile> atualizar(@PathVariable("id") int param,
 			@RequestBody Profile profileAtualizado) {
 
@@ -135,6 +132,8 @@ public class ProfileController {
 		atualizado.setEmail(profileAtualizado.getEmail());
 		atualizado.setPassword(profileAtualizado.getPassword());
 		atualizado.setAbout(profileAtualizado.getAbout());
+		atualizado.setImage(profileAtualizado.getImage());
+
 		profileRepository.save(atualizado);
 
 		return profileRepository.findById(param);
@@ -142,12 +141,12 @@ public class ProfileController {
 
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.ACCEPTED)
-
 	public @ResponseBody boolean deletar(@PathVariable("id") int param) {
 		profileRepository.deleteById(param);
 		return !profileRepository.existsById(param);
 	}
 
+	
 	private void setMaturidadeNivel3(Profile profile) {
 
 		final String PATH = "localhost:8080/profile";
