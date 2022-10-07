@@ -13,6 +13,7 @@ export class FaqComponent implements OnInit {
   faq!:any;
   sendQuestion: boolean = false;
   index: number = 6;
+  status3 : boolean = true
 
   constructor(private faqService: FaqService) { }
 
@@ -48,6 +49,7 @@ export class FaqComponent implements OnInit {
       !this.faq.message
 
     ) {
+      this.status3 = false
       valid = false;
     }
 
@@ -56,7 +58,6 @@ export class FaqComponent implements OnInit {
 
   create(): void {
     if (!this.validForm()) {
-      alert('Preencha os campos obrigatórios');
       return;
     }
 
