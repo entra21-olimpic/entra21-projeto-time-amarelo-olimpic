@@ -25,9 +25,10 @@ export class AboutComponent implements OnInit {
       .pipe(
         catchError((error) => {
           let usersTeam: Array<any> = new Array();
-          usersTeam.push({ id: 1 });
-          usersTeam.push({ id: 2 });
-          usersTeam.push({ id: 3 });
+          usersTeam.push({ id: 1, full_name:"Alexsandro Correa", funcao:"Função", funcao_about:"Implantar descrição da função", img_team:"https://avatars.githubusercontent.com/u/104040311?v=4", social_github: "https://github.com/Alexsandro-Correa", social_instagram:"", social_linkedin:""});
+          usersTeam.push({ id: 2, full_name:"Ciro Ugalde", funcao:"Função", funcao_about:"Implantar descrição da função", img_team:"https://avatars.githubusercontent.com/u/102829436?v=4", social_github: "https://github.com/Alexsandro-Correa", social_instagram:"", social_linkedin:""});
+          usersTeam.push({ id: 3, full_name:"Stephanie Vieira", funcao:"Função", funcao_about:"Implantar descrição da função", img_team:"https://avatars.githubusercontent.com/u/104040319?v=4", social_github: "https://github.com/Alexsandro-Correa", social_instagram:"", social_linkedin:""});
+          usersTeam.push({ id: 4, full_name:"Lucas Corrêa Agostinho", funcao:"Função", funcao_about:"Implantar descrição da função", img_team:"https://avatars.githubusercontent.com/u/77413786?v=4", social_github: "https://github.com/Alexsandro-Correa", social_instagram:"", social_linkedin:""});
           return of(usersTeam);
         })
       )
