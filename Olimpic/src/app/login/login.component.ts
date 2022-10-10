@@ -31,13 +31,16 @@ export class LoginComponent implements OnInit {
 
       .pipe(
         catchError((error) => {
-          this.status=false
           return of(null);
         })
       )
 
       .subscribe((response: any) => {
         console.log(response);
+
+        if(response == null){
+          this.status=false
+        }
 
         if (response != null) {
           let dados =  localStorage.setItem('dados', JSON.stringify (response));

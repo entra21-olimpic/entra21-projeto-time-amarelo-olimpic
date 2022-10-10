@@ -34,20 +34,22 @@
   as possible!
 </h6>
 
+
+
 <div class="md:grid md:grid-cols-6 md:gap-6 ">
   <div class="md:col-span-2"></div>
   <div class="md:col-span-2">
-    <div class="items-center rounded-lg">
+    <div class="form items-center rounded-lg">
       <div class="form-group mb-6">
-        <label for="name"></label>
-        <input
+          <label for="name"></label>
+          <input
           [(ngModel)]="faq.name"
           type="text"
           class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
           id="name"
           placeholder="Name"
-        />
-      </div>
+          />
+        </div>
       <div class="form-group mb-6">
         <label for="email"></label>
         <input
@@ -71,10 +73,11 @@
           </div>
 
           <div class="grid grid-cols-6 gap-6">
-            <div class="mb-4 col-span-6 sm:col-span-3">
+            <div class="form-group mb-4 col-span-6 sm:col-span-3">
               <button
+                (click)="clean()"
                 type="reset"
-                class="w-full px-6 py-2.5 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-400 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                class="form-group w-full px-6 py-2.5 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-400 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
               >
                 Clean
               </button>
@@ -90,6 +93,11 @@
               </button>
             </div>
           </div>
+
+          <div [hidden]="!sendSuccess" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+            <span> Pergunta enviada com sucesso!</span>
+          </div>
+
           <div [hidden]=" status3" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
             <strong class="font-bold">Atenção! </strong>
             <span class="block sm:inline"> Preencha todos os campos obrigatórios.</span>
