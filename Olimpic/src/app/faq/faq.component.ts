@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { catchError, of } from 'rxjs';
 import { FaqService } from '../faq.service';
 
@@ -13,7 +14,8 @@ export class FaqComponent implements OnInit {
   faq!:any;
   sendQuestion: boolean = false;
   index: number = 6;
-  status3 : boolean = true
+  status3 : boolean = true;
+  sendSuccess: boolean = false;
 
   constructor(private faqService: FaqService) { }
 
@@ -73,7 +75,8 @@ export class FaqComponent implements OnInit {
 
         if (response) {
           this.faqs.push(response);
-
+          this.faq = {};
+          this.sendSuccess = true;
         }
       });
   }
@@ -123,5 +126,9 @@ export class FaqComponent implements OnInit {
         }
       });
   }
+
+ clean(){
+  this.faq = {};
+ }
 
 }
