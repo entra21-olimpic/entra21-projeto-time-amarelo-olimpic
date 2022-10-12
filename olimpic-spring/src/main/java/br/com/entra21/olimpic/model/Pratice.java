@@ -22,16 +22,18 @@ public class Pratice extends MaturidadeNivel3Richardson{
 	private Integer id;
 	private LocalDateTime date_pratice;
 	private String duration;
+	private Integer profile_id;
 	
 	public Pratice() {
 		super();
 	}
 
-	public Pratice(Integer id, LocalDateTime date_pratice, String duration) {
+	public Pratice(Integer id, LocalDateTime date_pratice, String duration, Integer profile_id) {
 		super();
 		this.id = id;
 		this.date_pratice = date_pratice;
 		this.duration = duration;
+		this.profile_id = profile_id;
 	}
 
 	public Integer getId() {
@@ -56,6 +58,14 @@ public class Pratice extends MaturidadeNivel3Richardson{
 
 	public void setDuration(String duration) {
 		this.duration = duration;
+	}
+
+	public Integer getProfile_id() {
+		return profile_id;
+	}
+
+	public void setProfile_id(Integer profile_id) {
+		this.profile_id = profile_id;
 	}
 	
 	

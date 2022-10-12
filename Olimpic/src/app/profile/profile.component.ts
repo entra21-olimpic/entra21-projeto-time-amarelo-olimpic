@@ -25,12 +25,16 @@ export class ProfileComponent implements OnInit {
   duration!: String;
   date!: any;
 
+  teste = document.getElementById("name")?.textContent
+
   running: boolean = false;
+  praticeEnd : boolean = false;
 
   constructor(private praticeService: PraticeService, private userService:RegisterService) {}
 
   ngOnInit(): void {
     this.getAll();
+    this.getAllpratices();
     this.user = {};
     this.links = new Array();
     this.pratice = {};
@@ -45,6 +49,25 @@ export class ProfileComponent implements OnInit {
     this.links.push(JSON.parse(localStorage.getItem('dados') || ''));
 
     console.log(this.links);
+  }
+
+  getAllpratices():void{
+    this.praticeService
+      .getAllPratice()
+      .pipe(
+        catchError((error) => {
+          let pratices: Array<any> = new Array();
+          pratices.push({ id: 1 });
+          pratices.push({ id: 2 });
+          pratices.push({ id: 3 });
+          return of(pratices);
+        })
+      )
+      .subscribe((response) => {
+        console.log(response);
+
+        this.pratices = response;
+      });
   }
 
   getAll(): void {
@@ -67,6 +90,7 @@ export class ProfileComponent implements OnInit {
   }
 
   startTimer() {
+    this.praticeEnd = false;
     this.running = true;
     this.seconds = 0;
     this.minutes = 0;
@@ -86,34 +110,44 @@ export class ProfileComponent implements OnInit {
   }
 
   pauseTimer() {
+    this.praticeEnd = true;
+    this.duration = this.minutes + ':' + this.seconds;
     this.running = false;
     clearInterval(this.interval);
-    this.duration = this.minutes + ':' + this.seconds;
-
     console.log(this.duration);
+  }
 
+  returnDados(){
+    this.praticeEnd = false;
+    this.duration = this.minutes + ':' + this.seconds;
     this.praticeService
-      .resultPratice(this.getDados())
-      .pipe(
-        catchError((error) => {
-          return of(null);
-        })
-      )
-      .subscribe((response: any) => {
+    .savePratice(this.getDados())
+    .pipe(
+      catchError((error) => {
+        return of(null);
+      })
+    )
+    .subscribe((response: any) => {
 
-        if (response) {
-          this.pratices.push(response);
-        }
-        console.log(response);
+      if (response) {
 
-        console.log(this.pratices);
-      });
+        this.pratices.push(response);
+      }
+      console.log("Response",response);
+
+      console.log("Pratices",this.pratices);
+    });
+  }
+
+  discardDados(){
+    this.praticeEnd = false;
   }
 
   getDados(): any {
     return {
       duration: this.duration,
       date_pratice: this.date,
+      profile_id: this.links[0].id
     };
   }
 }

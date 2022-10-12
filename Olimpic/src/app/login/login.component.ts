@@ -11,9 +11,7 @@ import { LoginService } from '../login.service';
 export class LoginComponent implements OnInit {
   email!: string;
   password!: string;
-  teste!: Array<JSON>;
   status: Boolean=true;
-
 
   constructor(private loginService: LoginService, private router: Router) {}
 
