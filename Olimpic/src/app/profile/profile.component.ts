@@ -25,7 +25,8 @@ export class ProfileComponent implements OnInit {
   duration!: String;
   date!: any;
 
-  teste = document.getElementById("name")?.textContent
+  returnPratices!: Array<any>;
+  returnPratice!: any;
 
   running: boolean = false;
   praticeEnd : boolean = false;
@@ -35,6 +36,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.getAll();
     this.getAllpratices();
+    this.getPratices();
     this.user = {};
     this.links = new Array();
     this.pratice = {};
@@ -69,6 +71,20 @@ export class ProfileComponent implements OnInit {
         this.pratices = response;
       });
   }
+
+  getPratices(){
+    this.praticeService.listName()
+    .pipe(
+      catchError((error) => {
+        return of(null);
+      })
+    )
+    .subscribe((response) => {
+      console.log("Aquiii",response);
+
+      this.returnPratices = response;
+    });
+}
 
   getAll(): void {
     this.userService
@@ -130,7 +146,7 @@ export class ProfileComponent implements OnInit {
     .subscribe((response: any) => {
 
       if (response) {
-
+        this.getPratices();
         this.pratices.push(response);
       }
       console.log("Response",response);

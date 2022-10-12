@@ -55,8 +55,8 @@ public class PraticeController {
 	}
 	
 	
-	@GetMapping("/teste")
-	public List<Profile> listName(){
+	@GetMapping("/returnpratice")
+	public ArrayList<String> listName(){
 		return praticeRepository.getPratice();
 	}
 	
