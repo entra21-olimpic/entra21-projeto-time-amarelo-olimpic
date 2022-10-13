@@ -80,7 +80,7 @@ export class ProfileComponent implements OnInit {
       })
     )
     .subscribe((response) => {
-      console.log("Aquiii",response);
+      console.log(response);
 
       this.returnPratices = response;
     });

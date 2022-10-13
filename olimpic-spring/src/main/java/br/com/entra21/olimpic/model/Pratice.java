@@ -10,20 +10,19 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
-
 @Entity
 @Table(name = "pratice")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 
-public class Pratice extends MaturidadeNivel3Richardson{
-	
+public class Pratice extends MaturidadeNivel3Richardson {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private LocalDateTime date_pratice;
 	private String duration;
 	private Integer profile_id;
-	
+
 	public Pratice() {
 		super();
 	}
@@ -67,8 +66,5 @@ public class Pratice extends MaturidadeNivel3Richardson{
 	public void setProfile_id(Integer profile_id) {
 		this.profile_id = profile_id;
 	}
-	
-	
-	
 
 }
