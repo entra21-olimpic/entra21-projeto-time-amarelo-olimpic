@@ -1,3 +1,4 @@
+
 <div
   class="h-screen w-screen bg-yellow-400 overflow-hidden absolute flex items-center"
 >
@@ -20,10 +21,20 @@
     <div class="lg:w-1/2 bg-white text-gray-800 flex flex-col">
       <div class="p-8 shadow-md relative bg-white">
         <div class="flex items-center">
-          <img
-            src="https://randomuser.me/api/portraits/men/1.jpg"
+          <div *ngIf="links[0].image">
+             <img
+            src="{{links[0].image}}"
             class="w-10 h-10 block rounded object-cover object-top"
           />
+          </div>
+
+          <div *ngIf="!links[0].image">
+            <img
+            src="https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg"
+            class="w-10 h-10 object-cover rounded object-top"
+         />
+         </div>
+
           <div class="text-yellow-600 font-medium ml-3">
             {{ links[0].name + " " + links[0].last_name }}
           </div>
@@ -91,7 +102,7 @@
             <input type="checkbox" />
             <div class="flex ml-4">
               <div *ngIf="user.image">
-                <img src="{{ user.image }}" alt="" />
+                <img src="{{ user.image }}" alt="" width='50px' height='50px' class="rounded-full" />
               </div>
               <div *ngIf="!user.image">
                 <img
@@ -131,14 +142,23 @@
 
     <div class="lg:w-1/2 bg-yellow-600 text-white flex flex-col">
       <div class="p-8 bg-yellow-700 flex items-center">
-        <img
-          src="https://pbs.twimg.com/profile_images/1000050491970260993/FJkauyEa.jpg"
-          class="w-16 h-16 mr-4 object-top object-cover rounded"
-        />
+        <div *ngIf="links[0].image">
+          <img
+         src="{{links[0].image}}"
+         class="w-10 h-10 block rounded object-cover object-top"
+       />
+       </div>
+
+       <div *ngIf="!links[0].image">
+         <img
+         src="https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg"
+         class="w-10 h-10 object-cover rounded object-top"
+      />
+      </div>
         <div class="mr-auto">
-          <h1 class="text-xl leading-none mb-1">
+          <div class="text-white font-medium ml-3">
             {{ links[0].name + " " + links[0].last_name }}
-          </h1>
+          </div>
           <h2 class="text-white-400 text-sm">{{ links[0].graduation }}</h2>
         </div>
         <button
@@ -214,17 +234,6 @@
                   >
                     <input type="checkbox" />
                     <div class="flex ml-4">
-                      <!-- <div *ngIf="user.image">
-                        <img src="{{ user.image }}" alt="" />
-                      </div>
-                      <div *ngIf="!user.image">
-                        <img
-                          src="https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg"
-                          class="w-10 h-10 object-cover rounded object-top"
-                        />
-                        Aqui carrega a imagem dentro de um *ngFor de pratices. Precisa de Ajustes.
-                      </div> -->
-
                       <div class="flex flex-col pl-4">
                         <h2 class="font-medium text-sm text-black">
                          User: {{pratices[0]}}

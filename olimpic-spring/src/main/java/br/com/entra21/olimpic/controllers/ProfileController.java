@@ -1,9 +1,12 @@
 package br.com.entra21.olimpic.controllers;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,9 +18,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -132,6 +137,21 @@ public class ProfileController {
 		profileRepository.save(atualizado);
 
 		return profileRepository.findById(param);
+	}
+	
+	@PostMapping("/uploadimage")
+	public Profile upload(@RequestParam("image") MultipartFile image, Profile teste){
+		byte[] imageArray = null;
+		try {
+			imageArray = image.getBytes();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String imageAsString= Base64.getEncoder().encodeToString(imageArray);
+		teste.setImage(imageAsString);
+		return profileRepository.save(teste);
+		 
 	}
 
 	@DeleteMapping("/{id}")
