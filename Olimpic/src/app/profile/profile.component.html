@@ -156,9 +156,12 @@
           Stop Pratice
         </button>
       </div>
-      <div class="text-lg" [hidden]="!running">
-        Chronometer: {{duration}}
-      </div>
+
+      <div style="background-color:#2bff0080;text-align:center">
+      <span class="time" [hidden]="!running">
+       {{duration}}
+      </span>
+    </div>
 
       <div class="p-8 flex flex-1 items-start overflow-auto">
         <div class="flex-shrink-0 text-sm sticky top-0">
