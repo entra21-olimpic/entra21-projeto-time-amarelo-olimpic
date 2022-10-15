@@ -144,7 +144,7 @@
       <div class="p-8 bg-yellow-700 flex items-center">
         <div *ngIf="links[0].image">
           <img
-         src="{{links[0].image}}"
+         [src]="links[0].image"
          class="w-10 h-10 block rounded object-cover object-top"
        />
        </div>

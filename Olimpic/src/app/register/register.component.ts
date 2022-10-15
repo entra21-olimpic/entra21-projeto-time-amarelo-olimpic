@@ -15,6 +15,11 @@ export class RegisterComponent implements OnInit {
   signingup:boolean = false
   status2 : boolean = true
 
+  base64:string = "Base64...";
+  fileSelected?: any;
+  imageUrl?: string;
+  files: any;
+
   constructor(private userService: RegisterService, private router:Router) {}
 
   ngOnInit(): void {
@@ -133,5 +138,22 @@ export class RegisterComponent implements OnInit {
       });
   }
 
+  onFileSelected(event : any) :void {
+    this.fileSelected = event.target.files[0];
+    console.log(this.fileSelected);
+
+    let reader = new FileReader();
+    reader.readAsDataURL(this.fileSelected);
+    reader.onloadend = () =>{
+      this.base64 = reader.result as string;
+      console.log(this.base64);
+      this.user.image = this.base64;
+      this.userService.update(this.user).pipe(catchError((error)=>{
+        return of(error)
+      })).subscribe(response =>{
+        console.log(response);
+      })
+    }
+}
 
 }
