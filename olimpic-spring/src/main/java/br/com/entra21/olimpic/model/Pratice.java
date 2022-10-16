@@ -10,6 +10,11 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+
 @Entity
 @Table(name = "pratice")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -19,7 +24,8 @@ public class Pratice extends MaturidadeNivel3Richardson {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private LocalDateTime date_pratice;
+	
+	private String date_pratice;
 	private String duration;
 	private Integer profile_id;
 
@@ -27,7 +33,7 @@ public class Pratice extends MaturidadeNivel3Richardson {
 		super();
 	}
 
-	public Pratice(Integer id, LocalDateTime date_pratice, String duration, Integer profile_id) {
+	public Pratice(Integer id, String date_pratice, String duration, Integer profile_id) {
 		super();
 		this.id = id;
 		this.date_pratice = date_pratice;
@@ -43,11 +49,11 @@ public class Pratice extends MaturidadeNivel3Richardson {
 		this.id = id;
 	}
 
-	public LocalDateTime getDate_pratice() {
+	public String getDate_pratice() {
 		return date_pratice;
 	}
 
-	public void setDate_pratice(LocalDateTime date_pratice) {
+	public void setDate_pratice(String date_pratice) {
 		this.date_pratice = date_pratice;
 	}
 

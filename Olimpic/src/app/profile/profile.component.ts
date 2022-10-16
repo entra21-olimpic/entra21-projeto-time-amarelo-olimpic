@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { catchError, of } from 'rxjs';
 import { PraticeService } from '../pratice.service';
 import { RegisterService } from '../register.service';
@@ -11,13 +12,13 @@ import { RegisterService } from '../register.service';
 export class ProfileComponent implements OnInit {
   links!: Array<any>;
 
-  id!:number;
+  id!: number;
 
   pratices!: Array<any>;
   pratice!: any;
 
-  users!: Array<any>
-  user!:any;
+  users!: Array<any>;
+  user!: any;
 
   seconds: number = 0;
   minutes: number = 0;
@@ -34,9 +35,13 @@ export class ProfileComponent implements OnInit {
   returnPratice!: any;
 
   running: boolean = false;
-  praticeEnd : boolean = false;
+  praticeEnd: boolean = false;
 
-  constructor(private praticeService: PraticeService, private userService:RegisterService) {}
+  constructor(
+    private praticeService: PraticeService,
+    private userService: RegisterService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.getAll();
@@ -46,19 +51,15 @@ export class ProfileComponent implements OnInit {
     this.links = new Array();
     this.pratice = {};
     this.pratices = new Array();
-    this.date = new Date();
+    this.date = new Date().toLocaleString();
     this.date.now;
-    this.date.toDateString();
-
-    console.log(this.date);
-
 
     this.links.push(JSON.parse(localStorage.getItem('dados') || ''));
 
     console.log(this.links);
   }
 
-  getAllpratices():void{
+  getAllpratices(): void {
     this.praticeService
       .getAllPratice()
       .pipe(
@@ -77,19 +78,20 @@ export class ProfileComponent implements OnInit {
       });
   }
 
-  getPratices(){
-    this.praticeService.listName()
-    .pipe(
-      catchError((error) => {
-        return of(null);
-      })
-    )
-    .subscribe((response) => {
-      console.log(response);
+  getPratices() {
+    this.praticeService
+      .listName()
+      .pipe(
+        catchError((error) => {
+          return of(null);
+        })
+      )
+      .subscribe((response) => {
+        console.log(response);
 
-      this.returnPratices = response;
-    });
-}
+        this.returnPratices = response;
+      });
+  }
 
   getAll(): void {
     this.userService
@@ -113,6 +115,7 @@ export class ProfileComponent implements OnInit {
   startTimer() {
     this.praticeEnd = false;
     this.running = true;
+    this.duration = '00 : 00 : 00';
     this.seconds = 0;
     this.minutes = 0;
     this.hours = 0;
@@ -126,86 +129,96 @@ export class ProfileComponent implements OnInit {
           this.seconds = 0;
         }
 
-        if(this.minutes >= 60){
+        if (this.minutes >= 60) {
           this.hours++;
           this.minutes = 0;
         }
-
       } else {
         this.seconds < 60;
         console.log(this.seconds);
       }
 
-      if(this.seconds < 10 ){
+      if (this.seconds < 10) {
         this.secondsString = '0' + this.seconds;
-      }else{
+      } else {
         this.secondsString = '' + this.seconds;
       }
 
-      if(this.minutes < 10){
+      if (this.minutes < 10) {
         this.minutesString = '0' + this.minutes;
-      }else{
+      } else {
         this.minutesString = '' + this.minutes;
       }
 
-      if(this.hours < 10){
+      if (this.hours < 10) {
         this.hoursString = '0' + this.hours;
-      }else{
+      } else {
         this.hoursString = '' + this.hours;
       }
 
-
-
-
-
-      this.duration = this.hoursString + ' : ' +  this.minutesString + ' : ' + this.secondsString;
+      this.duration =
+        this.hoursString +
+        ' : ' +
+        this.minutesString +
+        ' : ' +
+        this.secondsString;
 
       console.log(this.duration);
-
-
     }, 1000);
-
   }
 
   pauseTimer() {
     this.praticeEnd = true;
-    this.duration = this.hoursString + ' : ' +  this.minutesString + ' : ' + this.secondsString;
+    this.duration =
+      this.hoursString +
+      ' : ' +
+      this.minutesString +
+      ' : ' +
+      this.secondsString;
     this.running = false;
     clearInterval(this.interval);
     console.log(this.duration);
   }
 
-  returnDados(){
+  returnDados() {
     this.praticeEnd = false;
-    this.duration = this.hoursString + ' : ' +  this.minutesString + ' : ' + this.secondsString;
+    this.duration =
+      this.hoursString +
+      ' : ' +
+      this.minutesString +
+      ' : ' +
+      this.secondsString;
     this.praticeService
-    .savePratice(this.getDados())
-    .pipe(
-      catchError((error) => {
-        return of(null);
-      })
-    )
-    .subscribe((response: any) => {
+      .savePratice(this.getDados())
+      .pipe(
+        catchError((error) => {
+          return of(null);
+        })
+      )
+      .subscribe((response: any) => {
+        if (response) {
+          this.getPratices();
+          this.pratices.push(response);
+        }
+        console.log('Response', response);
 
-      if (response) {
-        this.getPratices();
-        this.pratices.push(response);
-      }
-      console.log("Response",response);
-
-      console.log("Pratices",this.pratices);
-    });
+        console.log('Pratices', this.pratices);
+      });
   }
 
-  discardDados(){
+  discardDados() {
     this.praticeEnd = false;
+  }
+
+  settings(){
+    this.router.navigateByUrl('settings');
   }
 
   getDados(): any {
     return {
       duration: this.duration,
       date_pratice: this.date,
-      profile_id: this.links[0].id
+      profile_id: this.links[0].id,
     };
   }
 }

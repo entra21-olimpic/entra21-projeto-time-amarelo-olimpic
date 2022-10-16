@@ -22,7 +22,7 @@ export class RegisterService {
   }
 
   getById(profile:any):Observable<any>{
-    return this.http.get<any>(this.profileUrl,profile)
+    return this.http.get<any>(this.profileUrl + "/" + profile.id,profile)
   }
 
   create(profile:any):Observable<any>{
