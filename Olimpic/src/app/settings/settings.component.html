@@ -1,18 +1,4 @@
-<div class="grid grid-cols-6 gap-6">
-  <div class="md:col-span-2"></div>
-  <div class="md:col-span-2">
-    <div *ngFor="let user of users">
-      <div *ngIf="user.id === users[0].id">
-        <h1 class="text-center"><button  (click)="userForm(user)">Click Here to Update Data</button></h1>
-      </div>
-    </div>
-  </div>
-  <div class="md:col-span-2"></div>
-</div>
-
-
-
-<div [hidden]="!userUpdate">
+<div>
   <div class="grid grid-cols-6 gap-6">
     <div class="md:col-span-2"></div>
     <div class="md:col-span-2">

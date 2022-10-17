@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, isEmpty, of } from 'rxjs';
 import { LoginService } from '../login.service';
+import { SegurancaService } from '../seguranca.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
   password!: string;
   status: Boolean=true;
 
-  constructor(private loginService: LoginService, private router: Router) {}
+  constructor(private loginService: LoginService, private router: Router, private seguranca: SegurancaService) {}
 
   ngOnInit(): void {}
 
@@ -43,6 +44,7 @@ export class LoginComponent implements OnInit {
         if (response != null) {
           let dados =  localStorage.setItem('dados', JSON.stringify (response));
           console.log(dados);
+          this.seguranca.entrou = true;
 
           this.router.navigateByUrl('profile');
         } else {

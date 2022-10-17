@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, of } from 'rxjs';
 import { RegisterService } from '../register.service';
+import { SegurancaService } from '../seguranca.service';
 
 @Component({
   selector: 'app-settings',
@@ -20,7 +21,7 @@ export class SettingsComponent implements OnInit {
 
   userUpdate:boolean = false;
 
-  constructor(private userService: RegisterService, private router: Router) {}
+  constructor(private userService: RegisterService, private router: Router, private seguranca: SegurancaService) {}
 
   ngOnInit(): void {
 
@@ -29,6 +30,13 @@ export class SettingsComponent implements OnInit {
     this.users = new Array();
 
     this.users.push(JSON.parse(localStorage.getItem('dados') || ''));
+
+    console.log(this.user);
+    console.log(this.users);
+
+
+    this.initForm();
+
   }
 
   getAll(): void {
@@ -74,6 +82,7 @@ export class SettingsComponent implements OnInit {
 
         if (response) {
           this.users[this.users.indexOf(this.user)] = response;
+          this.seguranca.entrou = true;
           this.router.navigateByUrl('profile');
         }
       });
@@ -104,6 +113,17 @@ export class SettingsComponent implements OnInit {
 
   cancel() {
     this.router.navigateByUrl('profile');
+    this.seguranca.entrou = true;
+  }
+
+  initForm():void{
+    this.users.forEach(user => {
+      if(this.users[0].id){
+        console.log("Teste For", user);
+        return this.userForm(user);
+      }
+    });
+
   }
 
 
