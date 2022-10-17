@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: "header", component: HeaderComponent },
   { path: "home", component: HomeComponent },
   { path: "", component: HomeComponent },
-  { path: "profile", component: ProfileComponent, canActivate:[SegurancaService]},
+  { path: "profile", component: ProfileComponent},
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },
   { path: "settings", component: SettingsComponent},

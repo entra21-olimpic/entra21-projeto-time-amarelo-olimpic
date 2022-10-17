@@ -30,7 +30,7 @@
           <div *ngIf="!links[0].image">
             <img
               src="https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg"
-              class="w-10 h-10 object-cover rounded object-top"
+              class="w-10 h-10 block rounded object-cover object-top"
             />
           </div>
 
@@ -63,26 +63,17 @@
           Edit
         </button>
         </div>
-        <h1 class="font-medium text-lg mt-6">Contact List</h1>
+        <h1 class="font-medium text-lg mt-6">About</h1>
         <p class="text-gray-600 text-sm">
-          Fingerstache godard blog, cornhole meh hoodie
+          {{links[0].about}}
         </p>
         <div class="mt-6 flex">
-          <button
-            class="bg-yellow-500 text-white py-2 text-sm px-3 rounded focus:outline-none"
-          >
-            New Contact
-          </button>
-          <button
-            class="ml-4 text-gray-600 py-2 text-sm px-3 rounded focus:outline-none border border-gray-400"
-          >
-            New Task
-          </button>
-          <div class="relative ml-auto flex-1 pl-8 sm:block hidden">
+
+          <div class="relative ml-auto flex-1 sm:block hidden">
             <input
               placeholder="Search"
               type="text"
-              class="w-full border rounded border-gray-400 h-full focus:outline-none pl-4 pr-8 text-gray-700 text-sm text-gray-500"
+              class="w-full border rounded border-gray-400 h-10 focus:outline-none text-gray-700 text-sm text-gray-500"
             />
             <svg
               stroke="currentColor"
@@ -101,13 +92,12 @@
       </div>
 
       <div class="overflow-auto flex-grow">
-        <h1 style="background-color: #faf60f" class="font-medium text-lg m-6 text-center">Users List</h1>
+        <h1 class="font-medium text-lg m-6 text-center">Users List</h1>
         <div *ngFor="let user of users">
           <div
             *ngIf="user.name != links[0].name"
             class="bg-gray-100 px-8 py-6 flex items-center border-b border-gray-300"
           >
-            <input type="checkbox" />
             <div class="flex ml-4">
               <div *ngIf="user.image">
                 <img
@@ -152,7 +142,7 @@
           <div class="text-white font-medium ml-3">
             {{ links[0].name + " " + links[0].last_name }}
           </div>
-          <h2 class="text-white-400 text-sm">{{ links[0].graduation }}</h2>
+          <h2 class="text-white-400 text-sm ml-3">{{ links[0].graduation }}</h2>
         </div>
         <button
           [hidden]="running"
@@ -220,7 +210,7 @@
                 </div>
               </div>
 
-              <div class="text-center text-black text-lg" style= "background-color: #faf60f">Pratice History</div>
+              <div class="text-center text-white text-lg"><strong>Pratice History</strong></div>
               <br>
               <div *ngFor="let pratices of returnPratices">
                 <div

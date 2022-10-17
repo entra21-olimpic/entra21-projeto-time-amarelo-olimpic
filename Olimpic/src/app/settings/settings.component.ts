@@ -31,10 +31,6 @@ export class SettingsComponent implements OnInit {
 
     this.users.push(JSON.parse(localStorage.getItem('dados') || ''));
 
-    console.log(this.user);
-    console.log(this.users);
-
-
     this.initForm();
 
   }
@@ -119,7 +115,6 @@ export class SettingsComponent implements OnInit {
   initForm():void{
     this.users.forEach(user => {
       if(this.users[0].id){
-        console.log("Teste For", user);
         return this.userForm(user);
       }
     });
