@@ -7,7 +7,7 @@ public class MaturidadeNivel3Richardson {
 	ArrayList<ItemNivel3> links;
 
 	public MaturidadeNivel3Richardson() {
-		super();
+		this.links = new ArrayList<>();
 	}
 
 	public MaturidadeNivel3Richardson(ArrayList<ItemNivel3> links) {

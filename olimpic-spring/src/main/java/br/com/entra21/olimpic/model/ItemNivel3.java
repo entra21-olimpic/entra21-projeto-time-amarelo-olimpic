@@ -1,24 +1,18 @@
 package br.com.entra21.olimpic.model;
 
-import java.util.ArrayList;
-
 public class ItemNivel3 {
 
 	private String ref;
 	private String url;
-	private ArrayList<String> headers;
-	private String body;
 
 	public ItemNivel3() {
 		super();
 	}
 
-	public ItemNivel3(String ref, String url, ArrayList<String> headers, String body) {
+	public ItemNivel3(String ref, String url) {
 		super();
 		this.ref = ref;
 		this.url = url;
-		this.headers = headers;
-		this.body = body;
 	}
 
 	public String getRef() {
@@ -35,22 +29,6 @@ public class ItemNivel3 {
 
 	public void setUrl(String url) {
 		this.url = url;
-	}
-
-	public ArrayList<String> getHeaders() {
-		return headers;
-	}
-
-	public void setHeaders(ArrayList<String> headers) {
-		this.headers = headers;
-	}
-
-	public String getBody() {
-		return body;
-	}
-
-	public void setBody(String body) {
-		this.body = body;
 	}
 
 }

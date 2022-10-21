@@ -11,12 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import br.com.entra21.olimpic.model.ItemNivel3;
-import br.com.entra21.olimpic.model.Profile;
 import br.com.entra21.olimpic.model.Team;
 import br.com.entra21.olimpic.repository.ITeamRepository;
 
@@ -48,34 +43,10 @@ public class AboutController {
 
 		final String PATH = "localhost:8080/about";
 
-		ArrayList<String> headers = new ArrayList<String>();
+		team.setLinks(new ArrayList<>());
 
-		headers.add("Accept:application/json");
-		headers.add("Content-type:application/json");
-
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.setSerializationInclusion(Include.NON_NULL);
-
-		try {
-
-			Profile clone = mapper.readValue(mapper.writeValueAsString(team), Profile.class);
-			clone.setLinks(null);
-			String nomeAtual = clone.getName();
-			clone.setName("Nome diferente");
-			String jsonUpdate = mapper.writeValueAsString(clone);
-			clone.setName(nomeAtual);
-			clone.setId(null);
-			String jsonCreate = mapper.writeValueAsString(clone);
-
-			team.setLinks(new ArrayList<>());
-
-			team.getLinks().add(new ItemNivel3("GET", PATH, null, null));
-			team.getLinks().add(new ItemNivel3("GET", PATH + "/" + team.getId(), null, null));
-		} catch (JsonProcessingException e) {
-
-			e.printStackTrace();
-
-		}
+		team.getLinks().add(new ItemNivel3("GET", PATH));
+		team.getLinks().add(new ItemNivel3("GET", PATH + "/" + team.getId()));
 
 	}
 }

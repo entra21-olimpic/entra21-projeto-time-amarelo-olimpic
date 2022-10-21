@@ -14,23 +14,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import br.com.entra21.olimpic.model.ItemNivel3;
 import br.com.entra21.olimpic.model.Pratice;
-import br.com.entra21.olimpic.model.Profile;
 import br.com.entra21.olimpic.repository.IPraticeRepository;
 
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/pratice")
 public class PraticeController {
-	
+
 	@Autowired
 	private IPraticeRepository praticeRepository;
-	
+
 	@GetMapping()
 	@ResponseStatus(HttpStatus.OK)
 	public List<Pratice> listar() {
@@ -46,55 +41,27 @@ public class PraticeController {
 		return response;
 
 	}
-	
+
 	@PostMapping("/data")
 	@ResponseStatus(HttpStatus.CREATED)
 	public @ResponseBody Pratice resultPratice(@RequestBody Pratice data) {
 		return praticeRepository.save(data);
 	}
-	
-	
+
 	@GetMapping("/returnpratice")
-	public ArrayList<Object> listName(){
+	public ArrayList<Object> listName() {
 		return praticeRepository.getPratice();
 	}
-	
-	
-		
+
 	private void setMaturidadeNivel3(Pratice pratice) {
 
 		final String PATH = "localhost:8080/pratice";
 
-		ArrayList<String> headers = new ArrayList<String>();
+		pratice.setLinks(new ArrayList<>());
 
-		headers.add("Accept:application/json");
-		headers.add("Content-type:application/json");
-
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.setSerializationInclusion(Include.NON_NULL);
-
-		try {
-
-			Profile clone = mapper.readValue(mapper.writeValueAsString(pratice), Profile.class);
-			clone.setLinks(null);
-			String nomeAtual = clone.getName();
-			clone.setName("Nome diferente");
-			String jsonUpdate = mapper.writeValueAsString(clone);
-			clone.setName(nomeAtual);
-			clone.setId(null);
-			String jsonCreate = mapper.writeValueAsString(clone);
-
-			pratice.setLinks(new ArrayList<>());
-
-			pratice.getLinks().add(new ItemNivel3("GET", PATH, null, null));
-			pratice.getLinks().add(new ItemNivel3("GET", PATH + "/" + pratice.getId(), null, null));
-		} catch (JsonProcessingException e) {
-
-			e.printStackTrace();
-
-		}
+		pratice.getLinks().add(new ItemNivel3("GET", PATH));
+		pratice.getLinks().add(new ItemNivel3("GET", PATH + "/" + pratice.getId()));
 
 	}
-	
 
 }

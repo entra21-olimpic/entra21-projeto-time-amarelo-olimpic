@@ -17,13 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import br.com.entra21.olimpic.model.Faq;
 import br.com.entra21.olimpic.model.ItemNivel3;
-import br.com.entra21.olimpic.model.Profile;
 import br.com.entra21.olimpic.repository.IFaqRepository;
 
 @RestController
@@ -58,8 +53,7 @@ public class FaqController {
 
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public @ResponseBody Optional<Faq> update(@PathVariable("id") int param,
-			@RequestBody Faq answerOk) {
+	public @ResponseBody Optional<Faq> update(@PathVariable("id") int param, @RequestBody Faq answerOk) {
 
 		Faq atualizado = faqRepository.findById(param).get();
 		atualizado.setAnswer(answerOk.getAnswer());
@@ -73,37 +67,12 @@ public class FaqController {
 
 		final String PATH = "localhost:8080/faqs";
 
-		ArrayList<String> headers = new ArrayList<String>();
+		faq.setLinks(new ArrayList<>());
 
-		headers.add("Accept:application/json");
-		headers.add("Content-type:application/json");
-
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.setSerializationInclusion(Include.NON_NULL);
-
-		try {
-
-			Faq clone = mapper.readValue(mapper.writeValueAsString(faq), Faq.class);
-			clone.setLinks(null);
-			String nomeAtual = clone.getName();
-			clone.setName("Nome diferente");
-			String jsonUpdate = mapper.writeValueAsString(clone);
-			clone.setName(nomeAtual);
-			clone.setId(null);
-			String jsonCreate = mapper.writeValueAsString(clone);
-
-			faq.setLinks(new ArrayList<>());
-
-			faq.getLinks().add(new ItemNivel3("GET", PATH, null, null));
-			faq.getLinks().add(new ItemNivel3("GET", PATH + "/" + faq.getId(), null, null));
-			faq.getLinks().add(new ItemNivel3("POST", PATH, headers, jsonCreate));
-			faq.getLinks().add(new ItemNivel3("PUT", PATH + "/" + faq.getId(), headers, jsonUpdate));
-
-		} catch (JsonProcessingException e) {
-
-			e.printStackTrace();
-
-		}
+		faq.getLinks().add(new ItemNivel3("GET", PATH));
+		faq.getLinks().add(new ItemNivel3("GET", PATH + "/" + faq.getId()));
+		faq.getLinks().add(new ItemNivel3("POST", PATH));
+		faq.getLinks().add(new ItemNivel3("PUT", PATH + "/" + faq.getId()));
 
 	}
 }
