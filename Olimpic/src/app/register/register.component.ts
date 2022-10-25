@@ -1,5 +1,4 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, of } from 'rxjs';
 import { RegisterService } from '../register.service';
@@ -12,15 +11,15 @@ import { RegisterService } from '../register.service';
 export class RegisterComponent implements OnInit {
   users!: Array<any>;
   user!: any;
-  signingup:boolean = false
-  status2 : boolean = true
+  signingup: boolean = false;
+  status2: boolean = true;
 
-  base64:string = "Base64...";
+  base64: string = 'Base64...';
   fileSelected?: any;
   imageUrl?: string;
   files: any;
 
-  constructor(private userService: RegisterService, private router:Router) {}
+  constructor(private userService: RegisterService, private router: Router) {}
 
   ngOnInit(): void {
     this.getAll();
@@ -39,8 +38,6 @@ export class RegisterComponent implements OnInit {
         })
       )
       .subscribe((response) => {
-        console.log(response);
-
         this.users = response;
       });
   }
@@ -56,7 +53,7 @@ export class RegisterComponent implements OnInit {
       !this.user.email ||
       !this.user.password
     ) {
-      this.status2 = false
+      this.status2 = false;
       valid = false;
     }
 
@@ -82,16 +79,12 @@ export class RegisterComponent implements OnInit {
         if (response) {
           this.users.push(response);
           this.updateForm(response);
-
         }
       });
   }
 
   update(): void {
-
     this.updateForm(this.user);
-    console.log(this.user);
-
 
     this.userService
 
@@ -107,7 +100,6 @@ export class RegisterComponent implements OnInit {
         console.log(response);
 
         if (response) {
-          //this.users[this.users.indexOf(this.user)] = response;
           this.users.push(response);
           this.router.navigateByUrl('login');
         }
@@ -118,42 +110,26 @@ export class RegisterComponent implements OnInit {
     this.user = response;
   }
 
-  delete(user: any): void {
-    this.userService
-
-      .delete(user) //
-
-      .pipe(
-        catchError((error) => {
-          return of(false);
-        })
-      )
-
-      .subscribe((response: any) => {
-        console.log(response);
-
-        if (response) {
-          this.users.splice(this.users.indexOf(this.user), 1);
-        }
-      });
-  }
-
-  onFileSelected(event : any) :void {
+  onFileSelected(event: any): void {
     this.fileSelected = event.target.files[0];
     console.log(this.fileSelected);
 
     let reader = new FileReader();
     reader.readAsDataURL(this.fileSelected);
-    reader.onloadend = () =>{
+    reader.onloadend = () => {
       this.base64 = reader.result as string;
       console.log(this.base64);
       this.user.image = this.base64;
-      this.userService.update(this.user).pipe(catchError((error)=>{
-        return of(error)
-      })).subscribe(response =>{
-        console.log(response);
-      })
-    }
-}
-
+      this.userService
+        .update(this.user)
+        .pipe(
+          catchError((error) => {
+            return of(error);
+          })
+        )
+        .subscribe((response) => {
+          console.log(response);
+        });
+    };
+  }
 }

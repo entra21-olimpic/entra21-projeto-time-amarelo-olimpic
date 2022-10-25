@@ -5,16 +5,16 @@ import { RegisterService } from '../register.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  users!: Array<any>
-  user!: any
+  users!: Array<any>;
+  user!: any;
 
-  constructor(private userService: RegisterService) { }
+  constructor(private userService: RegisterService) {}
 
   ngOnInit(): void {
-    this.getAll()
+    this.getAll();
   }
 
   getAll(): void {
@@ -30,10 +30,7 @@ export class HomeComponent implements OnInit {
         })
       )
       .subscribe((response) => {
-        console.log(response);
-
         this.users = response;
       });
   }
-
 }

@@ -19,20 +19,19 @@ export class SettingsComponent implements OnInit {
   imageUrl?: string;
   files: any;
 
-  userUpdate:boolean = false;
+  userUpdate: boolean = false;
 
-  constructor(private userService: RegisterService, private router: Router, private seguranca: SegurancaService) {}
+  constructor(
+    private userService: RegisterService,
+    private router: Router,
+    private seguranca: SegurancaService
+  ) {}
 
   ngOnInit(): void {
-
     this.user = {};
-
     this.users = new Array();
-
     this.users.push(JSON.parse(localStorage.getItem('dados') || ''));
-
     this.initForm();
-
   }
 
   getAll(): void {
@@ -48,8 +47,6 @@ export class SettingsComponent implements OnInit {
         })
       )
       .subscribe((response) => {
-        console.log(response);
-
         this.users = response;
       });
   }
@@ -60,9 +57,6 @@ export class SettingsComponent implements OnInit {
   }
 
   update(): void {
-
-
-
     this.userService
 
       .update(this.user)
@@ -112,14 +106,11 @@ export class SettingsComponent implements OnInit {
     this.seguranca.entrou = true;
   }
 
-  initForm():void{
-    this.users.forEach(user => {
-      if(this.users[0].id){
+  initForm(): void {
+    this.users.forEach((user) => {
+      if (this.users[0].id) {
         return this.userForm(user);
       }
     });
-
   }
-
-
 }

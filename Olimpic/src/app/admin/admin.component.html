@@ -3,7 +3,7 @@
     <h3
       class="sm:text-3xl text-2xl font-medium text-center title-font text-gray-900 mb-4"
     >
-      Perguntas dos Usuários
+      User Questions
     </h3>
     <br />
 
@@ -29,7 +29,7 @@
     <div [hidden]="!responding">
       <label for="answer"></label>
       <textarea
-      [(ngModel)]="faq.answer"
+        [(ngModel)]="faq.answer"
         name="answer"
         id="answer"
         cols="20"
@@ -38,9 +38,6 @@
         id="answer"
         placeholder="Answer"
       >
-
-
-
       </textarea>
 
       <div class="grid grid-cols-6 gap-6">

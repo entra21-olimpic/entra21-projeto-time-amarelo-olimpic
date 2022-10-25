@@ -5,15 +5,14 @@ import { FaqService } from '../faq.service';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.css']
+  styleUrls: ['./admin.component.css'],
 })
 export class AdminComponent implements OnInit {
-
-  faqs!:Array<any>;
-  faq!:any;
+  faqs!: Array<any>;
+  faq!: any;
   responding: boolean = false;
 
-  constructor(private faqService:FaqService) { }
+  constructor(private faqService: FaqService) {}
 
   ngOnInit(): void {
     this.getAll();
@@ -45,9 +44,6 @@ export class AdminComponent implements OnInit {
   }
 
   update(): void {
-
-
-
     this.faqService
 
       .update(this.faq)
@@ -67,5 +63,4 @@ export class AdminComponent implements OnInit {
         }
       });
   }
-
 }

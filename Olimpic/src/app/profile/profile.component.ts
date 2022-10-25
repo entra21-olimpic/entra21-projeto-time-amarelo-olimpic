@@ -55,8 +55,6 @@ export class ProfileComponent implements OnInit {
     this.date.now;
 
     this.links.push(JSON.parse(localStorage.getItem('dados') || ''));
-
-    console.log(this.links);
   }
 
   getAllpratices(): void {
@@ -72,8 +70,6 @@ export class ProfileComponent implements OnInit {
         })
       )
       .subscribe((response) => {
-        console.log(response);
-
         this.pratices = response;
       });
   }
@@ -87,8 +83,6 @@ export class ProfileComponent implements OnInit {
         })
       )
       .subscribe((response) => {
-        console.log(response);
-
         this.returnPratices = response;
       });
   }
@@ -106,8 +100,6 @@ export class ProfileComponent implements OnInit {
         })
       )
       .subscribe((response) => {
-        console.log(response);
-
         this.users = response;
       });
   }
@@ -123,7 +115,6 @@ export class ProfileComponent implements OnInit {
     this.interval = setInterval(() => {
       if (this.seconds >= 0) {
         this.seconds++;
-        console.log(this.seconds.toPrecision());
         if (this.seconds >= 60) {
           this.minutes++;
           this.seconds = 0;
@@ -135,7 +126,6 @@ export class ProfileComponent implements OnInit {
         }
       } else {
         this.seconds < 60;
-        console.log(this.seconds);
       }
 
       if (this.seconds < 10) {
@@ -162,8 +152,6 @@ export class ProfileComponent implements OnInit {
         this.minutesString +
         ' : ' +
         this.secondsString;
-
-      console.log(this.duration);
     }, 1000);
   }
 
@@ -200,9 +188,6 @@ export class ProfileComponent implements OnInit {
           this.getPratices();
           this.pratices.push(response);
         }
-        console.log('Response', response);
-
-        console.log('Pratices', this.pratices);
       });
   }
 
@@ -210,7 +195,7 @@ export class ProfileComponent implements OnInit {
     this.praticeEnd = false;
   }
 
-  settings(){
+  settings() {
     this.router.navigateByUrl('settings');
   }
 

@@ -12,47 +12,44 @@ import { SegurancaService } from '../seguranca.service';
 export class LoginComponent implements OnInit {
   email!: string;
   password!: string;
-  status: Boolean=true;
+  status: Boolean = true;
 
-  constructor(private loginService: LoginService, private router: Router, private seguranca: SegurancaService) {}
+  constructor(
+    private loginService: LoginService,
+    private router: Router,
+    private seguranca: SegurancaService
+  ) {}
 
   ngOnInit(): void {}
 
   login(): void {
-
-
-    if(this.email === "admin@email.com" && this.password === "admin"){
+    if (this.email === 'admin@email.com' && this.password === 'admin') {
       this.router.navigateByUrl('admin');
-    }else{
+    } else {
       this.loginService
 
-      .login(this.getDados())
+        .login(this.getDados())
 
-      .pipe(
-        catchError((error) => {
-          return of(null);
-        })
-      )
+        .pipe(
+          catchError((error) => {
+            return of(null);
+          })
+        )
 
-      .subscribe((response: any) => {
-        console.log(response);
+        .subscribe((response: any) => {
+          if (response == null) {
+            this.status = false;
+          }
 
-        if(response == null){
-          this.status=false
-        }
+          if (response != null) {
+            let dados = localStorage.setItem('dados', JSON.stringify(response));
+            this.seguranca.entrou = true;
 
-        if (response != null) {
-          let dados =  localStorage.setItem('dados', JSON.stringify (response));
-          console.log(dados);
-          this.seguranca.entrou = true;
-
-          this.router.navigateByUrl('profile');
-        } else {
-        }
-      });
+            this.router.navigateByUrl('profile');
+          } else {
+          }
+        });
     }
-
-
   }
 
   getDados(): any {
@@ -61,5 +58,4 @@ export class LoginComponent implements OnInit {
       password: this.password,
     };
   }
-
 }
